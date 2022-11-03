@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2013-2021 Nikita Koksharov
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,9 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/**
+/**非线程安全的map
  * This is not a concurrent map.
- * 
+ *
  * @author Rui Gu (https://github.com/jackygurui)
  * @param <K> key
  * @param <V> value
@@ -32,7 +32,7 @@ public class BiHashMap<K, V> implements Map<K, V> {
 
     private Map<K, V> keyValueMap = new HashMap<K, V>();
     private Map<V, K> valueKeyMap = new HashMap<V, K>();
-    
+
     @Override
     public int size() {
         return keyValueMap.size();
@@ -57,7 +57,7 @@ public class BiHashMap<K, V> implements Map<K, V> {
     public V get(Object key) {
         return keyValueMap.get(key);
     }
-    
+
     public K reverseGet(Object key) {
         return valueKeyMap.get(key);
     }
@@ -97,7 +97,7 @@ public class BiHashMap<K, V> implements Map<K, V> {
     public Set<K> keySet() {
         return keyValueMap.keySet();
     }
-    
+
     public Set<V> valueSet() {
         return valueKeyMap.keySet();
     }
@@ -106,7 +106,7 @@ public class BiHashMap<K, V> implements Map<K, V> {
     public Collection<V> values() {
         return keyValueMap.values();
     }
-    
+
     public Collection<K> keys() {
         return valueKeyMap.values();
     }
@@ -115,11 +115,11 @@ public class BiHashMap<K, V> implements Map<K, V> {
     public Set<Entry<K, V>> entrySet() {
         return keyValueMap.entrySet();
     }
-    
+
     public Set<Entry<V, K>> reverseEntrySet() {
         return valueKeyMap.entrySet();
     }
-    
+
     public void makeImmutable() {
         keyValueMap = Collections.unmodifiableMap(keyValueMap);
         valueKeyMap = Collections.unmodifiableMap(valueKeyMap);

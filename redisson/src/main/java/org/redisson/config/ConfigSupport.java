@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2013-2021 Nikita Koksharov
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -46,12 +46,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 
+ *
  * @author Nikita Koksharov
  *
  */
 public class ConfigSupport {
-    
+
     @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "class")
     @JsonFilter("classFilter")
     public static class ClassMixIn {
@@ -80,7 +80,7 @@ public class ConfigSupport {
 
     protected final ObjectMapper jsonMapper = createMapper(null, null);
     protected final ObjectMapper yamlMapper = createMapper(new YAMLFactory(), null);
-    
+
     private String resolveEnvParams(Readable in) {
         Scanner s = new Scanner(in).useDelimiter("\\A");
         try {
@@ -92,7 +92,7 @@ public class ConfigSupport {
             s.close();
         }
     }
-    
+
     private String resolveEnvParams(String content) {
         Pattern pattern = Pattern.compile("\\$\\{([\\w\\.]+(:-.+?)?)\\}");
         Matcher m = pattern.matcher(content);
@@ -110,7 +110,7 @@ public class ConfigSupport {
         }
         return content;
     }
-    
+
     public <T> T fromJSON(String content, Class<T> configType) throws IOException {
         content = resolveEnvParams(content);
         return jsonMapper.readValue(content, configType);
@@ -119,7 +119,7 @@ public class ConfigSupport {
     public <T> T fromJSON(File file, Class<T> configType) throws IOException {
         return fromJSON(file, configType, null);
     }
-    
+
     public <T> T fromJSON(File file, Class<T> configType, ClassLoader classLoader) throws IOException {
         ObjectMapper jsonMapper = createMapper(null, classLoader);
         String content = resolveEnvParams(new FileReader(file));
@@ -153,7 +153,7 @@ public class ConfigSupport {
     public <T> T fromYAML(File file, Class<T> configType) throws IOException {
         return fromYAML(file, configType, null);
     }
-    
+
     public <T> T fromYAML(File file, Class<T> configType, ClassLoader classLoader) throws IOException {
         ObjectMapper yamlMapper = createMapper(new YAMLFactory(), classLoader);
         String content = resolveEnvParams(new FileReader(file));
@@ -179,6 +179,11 @@ public class ConfigSupport {
         return yamlMapper.writeValueAsString(config);
     }
 
+    /**
+     * 创建连接管理器
+     * @param configCopy
+     * @return
+     */
     public static ConnectionManager createConnectionManager(Config configCopy) {
         UUID id = UUID.randomUUID();
 
@@ -199,7 +204,7 @@ public class ConfigSupport {
             return new ReplicatedConnectionManager(configCopy.getReplicatedServersConfig(), configCopy, id);
         } else if (configCopy.getConnectionManager() != null) {
             return configCopy.getConnectionManager();
-        }else {
+        } else {
             throw new IllegalArgumentException("server(s) address(es) not defined!");
         }
     }
@@ -209,7 +214,7 @@ public class ConfigSupport {
             throw new IllegalArgumentException("connectionPoolSize can't be lower than connectionMinimumIdleSize");
         }
     }
-    
+
     private static void validate(BaseMasterSlaveServersConfig<?> config) {
         if (config.getSlaveConnectionPoolSize() < config.getSlaveConnectionMinimumIdleSize()) {
             throw new IllegalArgumentException("slaveConnectionPoolSize can't be lower than slaveConnectionMinimumIdleSize");
@@ -224,7 +229,7 @@ public class ConfigSupport {
 
     private ObjectMapper createMapper(JsonFactory mapping, ClassLoader classLoader) {
         ObjectMapper mapper = new ObjectMapper(mapping);
-        
+
         mapper.addMixIn(Config.class, ConfigMixIn.class);
         mapper.addMixIn(ReferenceCodecProvider.class, ClassMixIn.class);
         mapper.addMixIn(AddressResolverGroupFactory.class, ClassMixIn.class);
@@ -246,7 +251,7 @@ public class ConfigSupport {
                     .withClassLoader(classLoader);
             mapper.setTypeFactory(tf);
         }
-        
+
         return mapper;
     }
 

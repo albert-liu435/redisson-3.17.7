@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2013-2021 Nikita Koksharov
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 
+ * 主从redis配置类
  * @author Nikita Koksharov
  *
  */
@@ -62,6 +62,7 @@ public class MasterSlaveServersConfig extends BaseMasterSlaveServersConfig<Maste
         this.masterAddress = masterAddress;
         return this;
     }
+
     public String getMasterAddress() {
         return masterAddress;
     }
@@ -76,13 +77,16 @@ public class MasterSlaveServersConfig extends BaseMasterSlaveServersConfig<Maste
         slaveAddresses.addAll(Arrays.asList(addresses));
         return this;
     }
+
     public MasterSlaveServersConfig addSlaveAddress(String slaveAddress) {
         slaveAddresses.add(slaveAddress);
         return this;
     }
+
     public Set<String> getSlaveAddresses() {
         return slaveAddresses;
     }
+
     public void setSlaveAddresses(Set<String> readAddresses) {
         this.slaveAddresses = readAddresses;
     }
@@ -98,6 +102,7 @@ public class MasterSlaveServersConfig extends BaseMasterSlaveServersConfig<Maste
         this.database = database;
         return this;
     }
+
     public int getDatabase() {
         return database;
     }

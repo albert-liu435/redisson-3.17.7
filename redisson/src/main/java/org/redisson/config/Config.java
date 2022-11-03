@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2013-2021 Nikita Koksharov
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,6 +33,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Redisson的配置类
  * Redisson configuration
  *
  * @author Nikita Koksharov
@@ -80,7 +81,7 @@ public class Config {
 
     private int minCleanUpDelay = 5;
 
-    private int maxCleanUpDelay = 30*60;
+    private int maxCleanUpDelay = 30 * 60;
 
     private int cleanUpKeysAmount = 100;
 
@@ -163,7 +164,7 @@ public class Config {
      *
      * @see org.redisson.client.codec.Codec
      * @see org.redisson.codec.MarshallingCodec
-     * 
+     *
      * @param codec object
      * @return config
      */
@@ -180,7 +181,7 @@ public class Config {
      * Config option indicate whether Redisson Reference feature is enabled.
      * <p>
      * Default value is <code>true</code>
-     * 
+     *
      * @return <code>true</code> if Redisson Reference feature enabled
      */
     public boolean isReferenceEnabled() {
@@ -191,7 +192,7 @@ public class Config {
      * Config option for enabling Redisson Reference feature
      * <p>
      * Default value is <code>true</code>
-     * 
+     *
      * @param redissonReferenceEnabled flag
      */
     public void setReferenceEnabled(boolean redissonReferenceEnabled) {
@@ -260,7 +261,7 @@ public class Config {
     /**
      * Returns the connection manager if supplied via
      * {@link #useCustomServers(ConnectionManager)}
-     * 
+     *
      * @return ConnectionManager
      */
     ConnectionManager getConnectionManager() {
@@ -269,7 +270,7 @@ public class Config {
 
     /**
      * This is an extension point to supply custom connection manager.
-     * 
+     *
      * @see ReplicatedConnectionManager on how to implement a connection
      *      manager.
      * @param connectionManager for supply
@@ -467,7 +468,7 @@ public class Config {
      * and <code>RExecutorService</code> tasks.
      * <p>
      * The caller is responsible for closing the ExecutorService.
-     * 
+     *
      * @param executor object
      * @return config
      */
@@ -553,7 +554,7 @@ public class Config {
      * This setting applied only for PubSub messages per channel.
      * <p>
      * Default is <code>true</code>.
-     * 
+     *
      * @param keepPubSubOrder - <code>true</code> if order required, <code>false</code> otherwise.
      * @return config
      */
@@ -569,7 +570,7 @@ public class Config {
     /**
      * Used to switch between {@link io.netty.resolver.dns.DnsAddressResolverGroup} implementations.
      * Switch to round robin {@link io.netty.resolver.dns.RoundRobinDnsAddressResolverGroup} when you need to optimize the url resolving.
-     * 
+     *
      * @param addressResolverGroupFactory
      * @return config
      */
@@ -711,7 +712,7 @@ public class Config {
      * on could increase speed of such methods execution and save network traffic.
      * <p>
      * Default is <code>false</code>.
-     * 
+     *
      * @param useScriptCache - <code>true</code> if Lua-script caching is required, <code>false</code> otherwise.
      * @return config
      */
@@ -727,14 +728,14 @@ public class Config {
     public int getMinCleanUpDelay() {
         return minCleanUpDelay;
     }
-    
+
     /**
      * Defines minimum delay in seconds for clean up process of expired entries.
      * <p>
      * Applied to JCache, RSetCache, RMapCache, RListMultimapCache, RSetMultimapCache objects.
      * <p>
      * Default is <code>5</code>.
-     * 
+     *
      * @param minCleanUpDelay - delay in seconds
      * @return config
      */
@@ -746,7 +747,7 @@ public class Config {
     public int getMaxCleanUpDelay() {
         return maxCleanUpDelay;
     }
-    
+
     /**
      * Defines maximum delay in seconds for clean up process of expired entries.
      * <p>

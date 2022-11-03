@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2013-2021 Nikita Koksharov
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,47 +31,48 @@ import java.io.Serializable;
 public class RedissonReference implements Serializable {
 
     private static final long serialVersionUID = -2378564460151709127L;
-    
+
     private static final BiHashMap<String, String> REACTIVE_MAP = new BiHashMap<>();
     private static final BiHashMap<String, String> RXJAVA_MAP = new BiHashMap<>();
 
     static {
-        REACTIVE_MAP.put(RAtomicLongReactive.class.getName(),         RAtomicLong.class.getName());
-        REACTIVE_MAP.put(RBitSetReactive.class.getName(),             RBitSet.class.getName());
-        REACTIVE_MAP.put(RBlockingQueueReactive.class.getName(),      RBlockingQueue.class.getName());
-        REACTIVE_MAP.put(RBucketReactive.class.getName(),             RBucket.class.getName());
-        REACTIVE_MAP.put(RDequeReactive.class.getName(),              RDeque.class.getName());
-        REACTIVE_MAP.put(RHyperLogLogReactive.class.getName(),        RHyperLogLog.class.getName());
-        REACTIVE_MAP.put(RLexSortedSetReactive.class.getName(),       RLexSortedSet.class.getName());
-        REACTIVE_MAP.put(RListReactive.class.getName(),               RList.class.getName());
-        REACTIVE_MAP.put(RMapCacheReactive.class.getName(),           RMapCache.class.getName());
-        REACTIVE_MAP.put(RMapReactive.class.getName(),                RMap.class.getName());
-        REACTIVE_MAP.put(RQueueReactive.class.getName(),              RQueue.class.getName());
-        REACTIVE_MAP.put(RScoredSortedSetReactive.class.getName(),    RScoredSortedSet.class.getName());
-        REACTIVE_MAP.put(RSetCacheReactive.class.getName(),           RSetCache.class.getName());
-        REACTIVE_MAP.put(RSetReactive.class.getName(),                RSet.class.getName());
+        REACTIVE_MAP.put(RAtomicLongReactive.class.getName(), RAtomicLong.class.getName());
+        REACTIVE_MAP.put(RBitSetReactive.class.getName(), RBitSet.class.getName());
+        REACTIVE_MAP.put(RBlockingQueueReactive.class.getName(), RBlockingQueue.class.getName());
+        REACTIVE_MAP.put(RBucketReactive.class.getName(), RBucket.class.getName());
+        REACTIVE_MAP.put(RDequeReactive.class.getName(), RDeque.class.getName());
+        REACTIVE_MAP.put(RHyperLogLogReactive.class.getName(), RHyperLogLog.class.getName());
+        REACTIVE_MAP.put(RLexSortedSetReactive.class.getName(), RLexSortedSet.class.getName());
+        REACTIVE_MAP.put(RListReactive.class.getName(), RList.class.getName());
+        REACTIVE_MAP.put(RMapCacheReactive.class.getName(), RMapCache.class.getName());
+        REACTIVE_MAP.put(RMapReactive.class.getName(), RMap.class.getName());
+        REACTIVE_MAP.put(RQueueReactive.class.getName(), RQueue.class.getName());
+        REACTIVE_MAP.put(RScoredSortedSetReactive.class.getName(), RScoredSortedSet.class.getName());
+        REACTIVE_MAP.put(RSetCacheReactive.class.getName(), RSetCache.class.getName());
+        REACTIVE_MAP.put(RSetReactive.class.getName(), RSet.class.getName());
 
         REACTIVE_MAP.makeImmutable();
 
-        RXJAVA_MAP.put(RAtomicLongRx.class.getName(),         RAtomicLong.class.getName());
-        RXJAVA_MAP.put(RBitSetRx.class.getName(),             RBitSet.class.getName());
-        RXJAVA_MAP.put(RBlockingQueueRx.class.getName(),      RBlockingQueue.class.getName());
-        RXJAVA_MAP.put(RBucketRx.class.getName(),             RBucket.class.getName());
-        RXJAVA_MAP.put(RDequeRx.class.getName(),              RDeque.class.getName());
-        RXJAVA_MAP.put(RHyperLogLogRx.class.getName(),        RHyperLogLog.class.getName());
-        RXJAVA_MAP.put(RLexSortedSetRx.class.getName(),       RLexSortedSet.class.getName());
-        RXJAVA_MAP.put(RListRx.class.getName(),               RList.class.getName());
-        RXJAVA_MAP.put(RMapCacheRx.class.getName(),           RMapCache.class.getName());
-        RXJAVA_MAP.put(RMapRx.class.getName(),                RMap.class.getName());
-        RXJAVA_MAP.put(RQueueRx.class.getName(),              RQueue.class.getName());
-        RXJAVA_MAP.put(RScoredSortedSetRx.class.getName(),    RScoredSortedSet.class.getName());
-        RXJAVA_MAP.put(RSetCacheRx.class.getName(),           RSetCache.class.getName());
-        RXJAVA_MAP.put(RSetRx.class.getName(),                RSet.class.getName());
-
+        RXJAVA_MAP.put(RAtomicLongRx.class.getName(), RAtomicLong.class.getName());
+        RXJAVA_MAP.put(RBitSetRx.class.getName(), RBitSet.class.getName());
+        RXJAVA_MAP.put(RBlockingQueueRx.class.getName(), RBlockingQueue.class.getName());
+        RXJAVA_MAP.put(RBucketRx.class.getName(), RBucket.class.getName());
+        RXJAVA_MAP.put(RDequeRx.class.getName(), RDeque.class.getName());
+        RXJAVA_MAP.put(RHyperLogLogRx.class.getName(), RHyperLogLog.class.getName());
+        RXJAVA_MAP.put(RLexSortedSetRx.class.getName(), RLexSortedSet.class.getName());
+        RXJAVA_MAP.put(RListRx.class.getName(), RList.class.getName());
+        RXJAVA_MAP.put(RMapCacheRx.class.getName(), RMapCache.class.getName());
+        RXJAVA_MAP.put(RMapRx.class.getName(), RMap.class.getName());
+        RXJAVA_MAP.put(RQueueRx.class.getName(), RQueue.class.getName());
+        RXJAVA_MAP.put(RScoredSortedSetRx.class.getName(), RScoredSortedSet.class.getName());
+        RXJAVA_MAP.put(RSetCacheRx.class.getName(), RSetCache.class.getName());
+        RXJAVA_MAP.put(RSetRx.class.getName(), RSet.class.getName());
+        //map变为不可改变的
         RXJAVA_MAP.makeImmutable();
     }
 
-    public static void warmUp() {}
+    public static void warmUp() {
+    }
 
     public enum ReferenceType {RXJAVA, REACTIVE, DEFAULT}
 
@@ -89,8 +90,8 @@ public class RedissonReference implements Serializable {
     public RedissonReference(Class<?> type, String keyName, Codec codec) {
         if (!ClassUtils.isAnnotationPresent(type, REntity.class)
                 && !RObject.class.isAssignableFrom(type)
-                    && !RObjectReactive.class.isAssignableFrom(type)
-                        && !RObjectRx.class.isAssignableFrom(type)) {
+                && !RObjectReactive.class.isAssignableFrom(type)
+                && !RObjectRx.class.isAssignableFrom(type)) {
             throw new IllegalArgumentException("Class reference has to be a type of either RObject/RLiveObject/RObjectReactive/RObjectRx");
         }
         if (RObjectReactive.class.isAssignableFrom(type)) {
@@ -158,7 +159,7 @@ public class RedissonReference implements Serializable {
     public void setKeyName(String keyName) {
         this.keyName = keyName;
     }
-    
+
     public String getCodec() {
         return codec;
     }
