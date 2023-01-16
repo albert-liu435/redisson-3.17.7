@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2013-2021 Nikita Koksharov
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -48,7 +48,7 @@ import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 
-/**
+/**Jackson JSON 编码 默认编码
  * Json codec based on Jackson implementation.
  * https://github.com/FasterXML/jackson
  * <p>
@@ -64,15 +64,15 @@ public class JsonJacksonCodec extends BaseCodec {
 
     public static final JsonJacksonCodec INSTANCE = new JsonJacksonCodec();
 
-    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-    @JsonAutoDetect(fieldVisibility = Visibility.ANY, 
-                    getterVisibility = Visibility.PUBLIC_ONLY, 
-                    setterVisibility = Visibility.NONE, 
-                    isGetterVisibility = Visibility.NONE)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+    @JsonAutoDetect(fieldVisibility = Visibility.ANY,
+            getterVisibility = Visibility.PUBLIC_ONLY,
+            setterVisibility = Visibility.NONE,
+            isGetterVisibility = Visibility.NONE)
     public static class ThrowableMixIn {
-        
+
     }
-    
+
     protected final ObjectMapper mapObjectMapper;
 
     private final Encoder encoder = new Encoder() {
@@ -99,11 +99,11 @@ public class JsonJacksonCodec extends BaseCodec {
             return mapObjectMapper.readValue((InputStream) new ByteBufInputStream(buf), Object.class);
         }
     };
-    
+
     public JsonJacksonCodec() {
         this(new ObjectMapper());
     }
-    
+
     public JsonJacksonCodec(ClassLoader classLoader) {
         this(createObjectMapper(classLoader, new ObjectMapper()));
     }
@@ -155,28 +155,28 @@ public class JsonJacksonCodec extends BaseCodec {
         TypeResolverBuilder<?> mapTyper = new DefaultTypeResolverBuilder(DefaultTyping.NON_FINAL) {
             public boolean useForType(JavaType t) {
                 switch (_appliesFor) {
-                case NON_CONCRETE_AND_ARRAYS:
-                    while (t.isArrayType()) {
-                        t = t.getContentType();
-                    }
-                    // fall through
-                case OBJECT_AND_NON_CONCRETE:
-                    return t.getRawClass() == Object.class || !t.isConcrete();
-                case NON_FINAL:
-                    while (t.isArrayType()) {
-                        t = t.getContentType();
-                    }
-                    // to fix problem with wrong long to int conversion
-                    if (t.getRawClass() == Long.class) {
-                        return true;
-                    }
-                    if (t.getRawClass() == XMLGregorianCalendar.class) {
-                        return false;
-                    }
-                    return !t.isFinal(); // includes Object.class
-                default:
-                    // case JAVA_LANG_OBJECT:
-                    return t.getRawClass() == Object.class;
+                    case NON_CONCRETE_AND_ARRAYS:
+                        while (t.isArrayType()) {
+                            t = t.getContentType();
+                        }
+                        // fall through
+                    case OBJECT_AND_NON_CONCRETE:
+                        return t.getRawClass() == Object.class || !t.isConcrete();
+                    case NON_FINAL:
+                        while (t.isArrayType()) {
+                            t = t.getContentType();
+                        }
+                        // to fix problem with wrong long to int conversion
+                        if (t.getRawClass() == Long.class) {
+                            return true;
+                        }
+                        if (t.getRawClass() == XMLGregorianCalendar.class) {
+                            return false;
+                        }
+                        return !t.isFinal(); // includes Object.class
+                    default:
+                        // case JAVA_LANG_OBJECT:
+                        return t.getRawClass() == Object.class;
                 }
             }
         };
@@ -188,11 +188,11 @@ public class JsonJacksonCodec extends BaseCodec {
     protected void init(ObjectMapper objectMapper) {
         objectMapper.setSerializationInclusion(Include.NON_NULL);
         objectMapper.setVisibility(objectMapper.getSerializationConfig()
-                                                    .getDefaultVisibilityChecker()
-                                                        .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
-                                                        .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
-                                                        .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
-                                                        .withCreatorVisibility(JsonAutoDetect.Visibility.NONE));
+                .getDefaultVisibilityChecker()
+                .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
+                .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
+                .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
+                .withCreatorVisibility(JsonAutoDetect.Visibility.NONE));
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         objectMapper.enable(Feature.WRITE_BIGDECIMAL_AS_PLAIN);
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
@@ -209,7 +209,7 @@ public class JsonJacksonCodec extends BaseCodec {
     public Encoder getValueEncoder() {
         return encoder;
     }
-    
+
     @Override
     public ClassLoader getClassLoader() {
         if (mapObjectMapper.getTypeFactory().getClassLoader() != null) {

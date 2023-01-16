@@ -32,12 +32,18 @@ import java.util.Map;
 public class ClusterServersConfig extends BaseMasterSlaveServersConfig<ClusterServersConfig> {
 
     private NatMapper natMapper = NatMapper.direct();
-    
+
+    //nodeAddresses（添加节点地址）
+    //可以通过host:port的格式来添加Redis集群节点的地址。多个节点可以一次性批量添加。
     /**
      * Redis cluster node urls list
      */
     private List<String> nodeAddresses = new ArrayList<>();
 
+    //scanInterval（集群扫描间隔时间）
+    //默认值： 1000
+    //
+    //对Redis集群节点状态扫描的时间间隔。单位是毫秒。
     /**
      * Redis cluster scan interval in milliseconds
      */

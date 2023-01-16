@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.cbor.CBORFactory;
 
 /**
- *
+ *CBOR 又一个二进制的JSON编码
  * @author Faye Li
  * 
  */

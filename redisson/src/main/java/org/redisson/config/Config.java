@@ -37,7 +37,6 @@ import java.util.concurrent.TimeUnit;
  * Redisson configuration
  *
  * @author Nikita Koksharov
- *
  */
 public class Config {
 
@@ -55,26 +54,34 @@ public class Config {
 
     private ConnectionManager connectionManager;
 
+    //threads（线程池数量）
+    //这个线程池数量被所有RTopic对象监听器，RRemoteService调用者和RExecutorService任务共同共享。
     private int threads = 16;
-
+    //nettyThreads （Netty线程池数量）
+    //这个线程池数量是在一个Redisson实例内，被其创建的所有分布式数据类型和服务，以及底层客户端所一同共享的线程池里保存的线程数量
     private int nettyThreads = 32;
-
+    //默认值: org.redisson.codec.JsonJacksonCodec
+    //
     private Codec codec;
-
+    //单独提供一个用来执行所有RTopic对象监听器，RRemoteService调用者和RExecutorService任务的线程池（ExecutorService）实例。
     private ExecutorService executor;
 
     private boolean referenceEnabled = true;
 
     private TransportMode transportMode = TransportMode.NIO;
-
+    //用于特别指定一个EventLoopGroup. EventLoopGroup是用来处理所有通过Netty与Redis服务之间的连接发送和接受的消息。每一个Redisson都会在默认情况下自己创建管理一个EventLoopGroup实例。因此，如果在同一个JVM里面可能存在多个Redisson实例的情况下，采取这个配置实现多个Redisson实例共享一个EventLoopGroup的目的。
     private EventLoopGroup eventLoopGroup;
-
+    //监控锁的看门狗超时时间单位为毫秒。该参数只适用于分布式锁的加锁请求中未明确使用leaseTimeout参数的情况。如果该看门口未使用lockWatchdogTimeout去重新调整一个分布式锁的lockWatchdogTimeout超时，那么这个锁将变为失效状态。这个参数可以用来避免由Redisson客户端节点宕机或其他原因造成死锁的情况
     private long lockWatchdogTimeout = 30 * 1000;
 
     private boolean checkLockSyncedSlaves = true;
 
     private long reliableTopicWatchdogTimeout = TimeUnit.MINUTES.toMillis(10);
 
+    //keepPubSubOrder（保持订阅发布顺序）
+    //默认值：true
+    //
+    //通过该参数来修改是否按订阅发布消息的接收顺序出来消息，如果选否将对消息实行并行处理，该参数只适用于订阅发布消息的情况。
     private boolean keepPubSubOrder = true;
 
     private boolean useScriptCache = false;
@@ -162,11 +169,10 @@ public class Config {
     /**
      * Redis data codec. Default is MarshallingCodec codec
      *
-     * @see org.redisson.client.codec.Codec
-     * @see org.redisson.codec.MarshallingCodec
-     *
      * @param codec object
      * @return config
+     * @see org.redisson.client.codec.Codec
+     * @see org.redisson.codec.MarshallingCodec
      */
     public Config setCodec(Codec codec) {
         this.codec = codec;
@@ -271,9 +277,9 @@ public class Config {
     /**
      * This is an extension point to supply custom connection manager.
      *
-     * @see ReplicatedConnectionManager on how to implement a connection
-     *      manager.
      * @param connectionManager for supply
+     * @see ReplicatedConnectionManager on how to implement a connection
+     * manager.
      */
     public void useCustomServers(ConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
@@ -379,8 +385,8 @@ public class Config {
     }
 
     /**
-     * Threads amount shared across all listeners of <code>RTopic</code> object, 
-     * invocation handlers of <code>RRemoteService</code> object  
+     * Threads amount shared across all listeners of <code>RTopic</code> object,
+     * invocation handlers of <code>RRemoteService</code> object
      * and <code>RExecutorService</code> tasks.
      * <p>
      * Default is <code>16</code>.
@@ -462,9 +468,9 @@ public class Config {
     }
 
     /**
-     * Use external ExecutorService. ExecutorService processes 
-     * all listeners of <code>RTopic</code>, 
-     * <code>RRemoteService</code> invocation handlers  
+     * Use external ExecutorService. ExecutorService processes
+     * all listeners of <code>RTopic</code>,
+     * <code>RRemoteService</code> invocation handlers
      * and <code>RExecutorService</code> tasks.
      * <p>
      * The caller is responsible for closing the ExecutorService.
@@ -488,7 +494,7 @@ public class Config {
      * So if there are multiple Redisson instances in same JVM
      * it would be useful to share one EventLoopGroup among them.
      * <p>
-     * Only {@link io.netty.channel.epoll.EpollEventLoopGroup}, 
+     * Only {@link io.netty.channel.epoll.EpollEventLoopGroup},
      * {@link io.netty.channel.kqueue.KQueueEventLoopGroup}
      * {@link io.netty.channel.nio.NioEventLoopGroup} can be used.
      * <p>
@@ -535,7 +541,7 @@ public class Config {
      * Default is <code>true</code>.
      *
      * @param checkLockSyncedSlaves <code>true</code> if check required,
-     *                             <code>false</code> otherwise.
+     *                              <code>false</code> otherwise.
      * @return config
      */
     public Config setCheckLockSyncedSlaves(boolean checkLockSyncedSlaves) {
@@ -548,8 +554,8 @@ public class Config {
     }
 
     /**
-     * Defines whether to keep PubSub messages handling in arrival order 
-     * or handle messages concurrently. 
+     * Defines whether to keep PubSub messages handling in arrival order
+     * or handle messages concurrently.
      * <p>
      * This setting applied only for PubSub messages per channel.
      * <p>
@@ -632,6 +638,7 @@ public class Config {
     }
 
     /**
+     * 从yaml文件中读取redisson的配置
      * Read config object stored in YAML format from <code>String</code>
      *
      * @param content of config
@@ -696,6 +703,7 @@ public class Config {
     }
 
     /**
+     * 将当前的配置信息转化为yaml文件
      * Convert current configuration to YAML format
      *
      * @return config in yaml format
@@ -707,7 +715,7 @@ public class Config {
     }
 
     /**
-     * Defines whether to use Lua-script cache on Redis side. 
+     * Defines whether to use Lua-script cache on Redis side.
      * Most Redisson methods are Lua-script based and this setting turned
      * on could increase speed of such methods execution and save network traffic.
      * <p>

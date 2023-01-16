@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2013-2021 Nikita Koksharov
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,7 @@ import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 
-/**
+/**JDK序列化编码
  * JDK's serialization codec.
  * <p>
  * Fully thread-safe.*
@@ -84,13 +84,13 @@ public class SerializationCodec extends BaseCodec {
             }
         }
     };
-    
+
     private final ClassLoader classLoader;
 
     public SerializationCodec() {
         this(null);
     }
-    
+
     public SerializationCodec(ClassLoader classLoader) {
         this.classLoader = classLoader;
     }
@@ -98,7 +98,7 @@ public class SerializationCodec extends BaseCodec {
     public SerializationCodec(ClassLoader classLoader, SerializationCodec codec) {
         this.classLoader = classLoader;
     }
-    
+
     @Override
     public Decoder<Object> getValueDecoder() {
         return decoder;
@@ -108,7 +108,7 @@ public class SerializationCodec extends BaseCodec {
     public Encoder getValueEncoder() {
         return encoder;
     }
-    
+
     @Override
     public ClassLoader getClassLoader() {
         if (classLoader != null) {
